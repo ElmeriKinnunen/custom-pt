@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
+import AddCustomer from './AddCustomer';
 
 class CustomerList extends Component {
   constructor(props) {
@@ -20,6 +22,30 @@ class CustomerList extends Component {
       .then(jsondata => this.setState({customers: jsondata.content}))
       .catch(err => console.error(err));
   };
+
+  //delete customer
+  deleteCustomer = customerDel => {
+    if(window.confirm("Are you sure?")){
+      fetch(customerDel, {method: "DELETE"})
+        .then(res => this.loadCustomers())
+        .then(res => this.setState({open: true, message: "customer deleted"}))
+        .catch(err => console.error(err));
+    }
+  };
+
+  //add customer
+  addCustomer = newCustomer =>{
+    fetch("https://customerrest.herokuapp.com/api/customers", {
+      method: 'POST',
+      headers:{
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(newCustomer)
+    })
+      .then(res => this.loadCustomers())
+      .then(res => this.setState({open: true, message: 'New customer has been succesfully saved.'}))
+      .catch(err => console.error(err));
+  }
 
   handleClose = (event, reason) =>{
       this.setState({open: false});
@@ -55,9 +81,26 @@ class CustomerList extends Component {
             Header: "Phone",
             accessor: "phone"
           },
+          {
+            Header: "",
+            filterable: false,
+            sortable: false,
+            width: 110,
+            accessor: "links[0].href",
+            Cell: ({value}) => (
+              <Button color="secondary" size="small" onClick={() => this.deleteCustomer(value)}>Delete</Button>
+            )
+          },
+          {
+            Header: "",
+            filterable: false,
+            sortable: false,
+            width: 110,
+          }
       ];
     return (
       <div>
+          <AddCustomer addCustomer={this.addCustomer} />
           <ReactTable 
           filterable={true}
           data={this.state.customers}
