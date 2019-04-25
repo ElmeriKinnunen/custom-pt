@@ -59,7 +59,7 @@ class TrainingList extends Component {
           {
             id: "date",
             Header: "Date",
-            accessor: d => Moment(d.date).add(3, 'hours').locale('fi').format('MMMM Do YYYY, h:mm a'),
+            accessor: d => Moment(d.date).locale('fi').format('dddd D.MM.YYYY - HH:mm'),
               
           },
           {
