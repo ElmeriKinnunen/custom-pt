@@ -40,7 +40,7 @@ class AddCustomer extends Component {
     return (
       <div>
         <Button style={{margin: 10}} variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          Add new customer
+            Add new customer
         </Button>
         <Dialog
           open={this.state.open}
@@ -48,6 +48,7 @@ class AddCustomer extends Component {
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Add customer</DialogTitle>
+
           <DialogContent>
             <TextField autoFocus margin="dense" name="firstname" value={this.state.firstname} onChange={this.handleChange} label="Firstname" fullWidth/>
             <TextField margin="dense" name="lastname" value={this.state.lastname} onChange={this.handleChange} label="Lastname" fullWidth/>
@@ -57,13 +58,10 @@ class AddCustomer extends Component {
             <TextField margin="dense" name="email" value={this.state.email} onChange={this.handleChange} label="Email" fullWidth/>
             <TextField margin="dense" name="phone" value={this.state.phone} onChange={this.handleChange} label="Phone" fullWidth/>
           </DialogContent>
+
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.saveCustomer} color="primary">
-              Save
-            </Button>
+            <Button onClick={this.handleClose} color="primary">Cancel</Button>
+            <Button onClick={this.saveCustomer} color="primary">Save</Button>
           </DialogActions>
         </Dialog>        
       </div>

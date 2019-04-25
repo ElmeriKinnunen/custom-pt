@@ -4,6 +4,7 @@ import "react-table/react-table.css";
 import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
 import AddCustomer from './AddCustomer';
+import AddTraining from "./AddTraining";
 
 class CustomerList extends Component {
   constructor(props) {
@@ -23,6 +24,14 @@ class CustomerList extends Component {
       .catch(err => console.error(err));
   };
 
+    // fetch all training
+    loadTrainings = () => {
+      fetch("https://customerrest.herokuapp.com/api/trainings")
+        .then(response => response.json())
+        .then(jsondata => this.setState({trainings: jsondata.content}))
+        .catch(err => console.error(err));
+    };
+
   //delete customer
   deleteCustomer = customerDel => {
     if(window.confirm("Are you sure?")){
@@ -37,9 +46,7 @@ class CustomerList extends Component {
   addCustomer = newCustomer =>{
     fetch("https://customerrest.herokuapp.com/api/customers", {
       method: 'POST',
-      headers:{
-        'Content-type': 'application/json'
-      },
+      headers:{'Content-type': 'application/json'},
       body: JSON.stringify(newCustomer)
     })
       .then(res => this.loadCustomers())
@@ -47,7 +54,20 @@ class CustomerList extends Component {
       .catch(err => console.error(err));
   }
 
-  handleClose = (event, reason) =>{
+  //add training to customer
+  addTraining(training) {
+    console.log(training);
+    fetch('https://customerrest.herokuapp.com/api/trainings/',
+    {   method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(training)
+    })
+    .then(res => this.loadTrainings())
+    .then(res => this.setState({open: true, message: 'training added'}))
+    .catch(err => console.error(err))
+  }
+
+  handleClose = () =>{
       this.setState({open: false});
   }
 
@@ -88,7 +108,7 @@ class CustomerList extends Component {
             width: 110,
             accessor: "links[0].href",
             Cell: ({value}) => (
-              <Button color="secondary" size="small" onClick={() => this.deleteCustomer(value)}>Delete</Button>
+              <AddTraining customer={value} addTraining={this.addTraining} loadTrainings={this.loadTrainings}/>
             )
           },
           {
@@ -96,7 +116,11 @@ class CustomerList extends Component {
             filterable: false,
             sortable: false,
             width: 110,
-          }
+            accessor: "links[0].href",
+            Cell: ({value}) => (<Button color="secondary" size="small" onClick={() => this.deleteCustomer(value)}>Delete</Button>
+            )
+          },
+          
       ];
     return (
       <div>

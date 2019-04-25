@@ -3,6 +3,7 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Snackbar from '@material-ui/core/Snackbar';
 import Moment from "moment";
+import Button from '@material-ui/core/Button';
 
 
 class TrainingList extends Component {
@@ -25,7 +26,30 @@ class TrainingList extends Component {
       .catch(err => console.error(err));
   };
 
-  handleClose = (event, reason) =>{
+  //delete one training
+  deleteTraining = trainigDel => {
+    if (window.confirm("Are you sure?")){
+      fetch(trainigDel, {method: "DELETE"})
+      .then(res => this.loadTrainings())
+      .then(res => this.setState({open: true, message: 'training deleted'}))
+      .catch(err => console.error(err));
+    }
+  };
+
+    //add training to customer
+    addTraining = (training) =>{
+      fetch("https://customerrest.herokuapp.com/api/customers",
+    {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(training)
+      })
+      .then(res => this.loadTrainings())
+      .then(res => this.setState({open: true, message: 'training added'}))
+      .catch(err => console.error(err))
+    }
+
+  handleClose = () =>{
       this.setState({open: false});
   }
 
@@ -46,6 +70,14 @@ class TrainingList extends Component {
               Header: "Activity",
               accessor: "activity"
           },
+          {
+            Header: "",
+            filterable: false,
+            sortable: false,
+            width: 110,
+            accessor: "links[0].href",
+            Cell: ({value}) => (<Button color="secondary" size="small" onClick={() => this.deleteTraining(value)}>Delete</Button>)
+          }
       ];
 
     return (
