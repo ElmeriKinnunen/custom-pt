@@ -117,7 +117,8 @@ class CustomerList extends Component {
             sortable: false,
             width: 110,
             accessor: "links[0].href",
-            Cell: ({value}) => (<Button color="secondary" size="small" onClick={() => this.deleteCustomer(value)}>Delete</Button>
+            Cell: ({value}) => (
+              <Button color="secondary" size="small" onClick={() => this.deleteCustomer(value)}>Delete</Button>
             )
           },
           

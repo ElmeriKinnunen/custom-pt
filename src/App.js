@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
 import TrainingList from './components/TrainingList';
 import './App.css';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import {Route, Switch, BrowserRouter} from 'react-router-dom';
 import CustomerList from './components/CustomerList';
+import Navigator from './components/Navigator';
+import Calendar from './components/Calendar';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <AppBar position="static" color="default">
-          <Toolbar>
-            <Typography variant="h3" color="inherit">
-              Custom Pt
-            </Typography>
-          </Toolbar>
-        </AppBar>
-          <div className="trainings">
-            <h3>Trainings</h3>
-            <TrainingList />
+        <BrowserRouter>
+          <div>
+            <Navigator />
+            <Switch>
+              <Route exact path="/calendar" component={Calendar} />
+              <Route path="/trainings" component={TrainingList} />
+              <Route path="/customers" component={CustomerList} />
+              <Route render={() => <h2>Page not found 404</h2>} />
+            </Switch>
           </div>
-          <div className="customers">
-            <h3>Customers</h3>
-            <CustomerList />
-          </div>
+        </BrowserRouter>
       </div>
     );
   }
