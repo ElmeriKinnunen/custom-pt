@@ -5,7 +5,7 @@ import Moment from 'moment';
 
 const localizer = BigCalendar.momentLocalizer(Moment)
 
-export default class TrainingCalendar extends Component {
+class Calendar extends Component {
 
   constructor(props) {
     super(props);
@@ -53,9 +53,18 @@ export default class TrainingCalendar extends Component {
           step={30}
           showMultiDayTimes
           defaultDate={new Date()}
-          style={{ height: "480px", margin: "60px 40px" }}
+          style={{ height: "720px", margin: "50px 50px" }}
+
+          onSelectEvent={event => alert(event.title)}
+          onSelectSlot={(slotInfo) => alert(
+            `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
+            `\nend: ${slotInfo.end.toLocaleString()}` +
+            `\naction: ${slotInfo.action}`
+          )}
         />
       </div>
     );
   }
 }
+
+export default Calendar;

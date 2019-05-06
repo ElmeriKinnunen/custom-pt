@@ -14,7 +14,7 @@ class App extends Component {
           <div>
             <Navigator />
             <Switch>
-              <Route exact path="/calendar" component={Calendar} />
+            <Route exact path="/" component={Calendar}/>
               <Route path="/trainings" component={TrainingList} />
               <Route path="/customers" component={CustomerList} />
               <Route render={() => <h2>Page not found 404</h2>} />
