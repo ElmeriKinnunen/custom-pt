@@ -130,6 +130,7 @@ class CustomerList extends Component {
       <div>
           <AddCustomer addCustomer={this.addCustomer} />
           <ReactTable 
+          style={{marginLeft: "20px", marginRight: "20px;", }}
           filterable={true}
           data={this.state.customers}
           columns={columns}

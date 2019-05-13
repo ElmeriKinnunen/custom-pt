@@ -87,7 +87,7 @@ class TrainingList extends Component {
 
       <div>
           <ReactTable 
-          style={{marginTop: "40px" }}
+          style={{marginTop: "40px", marginLeft: "20px", marginRight: "20px;", }}
           filterable={true}
           data={this.state.trainings}
           columns={columns}
