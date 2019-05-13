@@ -5,6 +5,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import AddIcon from '@material-ui/icons/Add';
+
 import Moment from 'moment';
 
 class AddTraining extends Component {
@@ -39,10 +41,12 @@ class AddTraining extends Component {
         
         return(
             <div>
-                <Button size="small" color="primary" onClick={() => this.setState({open:true})}>add training</Button>
+                <Button color="primary" aria-label="Add" size="small" onClick={() => this.setState({open:true})}>
+                    <AddIcon />
+                </Button>
 
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">new training</DialogTitle>
+                <DialogTitle id="form-dialog-title">add new training</DialogTitle>
 
                 <DialogContent>
                  <TextField autoFocus margin="dense" name="date" value={this.state.date} onChange={this.handleChange} label="Date" fullWidth/>

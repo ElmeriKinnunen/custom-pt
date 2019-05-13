@@ -50,10 +50,10 @@ class Calendar extends Component {
           }}
 
           drilldownView="agenda"
-          step={30}
+          step={15}
           showMultiDayTimes
           defaultDate={new Date()}
-          style={{ height: "720px", margin: "50px 50px" }}
+          style={{ height: "720px", margin: "50px 50px", marginTop: "40px" }}
 
           onSelectEvent={event => alert(event.title)}
           onSelectSlot={(slotInfo) => alert(

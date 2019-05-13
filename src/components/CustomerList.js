@@ -5,6 +5,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
 import AddCustomer from './AddCustomer';
 import AddTraining from "./AddTraining";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class CustomerList extends Component {
   constructor(props) {
@@ -118,7 +119,9 @@ class CustomerList extends Component {
             width: 110,
             accessor: "links[0].href",
             Cell: ({value}) => (
-              <Button color="secondary" size="small" onClick={() => this.deleteCustomer(value)}>Delete</Button>
+              <Button color="secondary" className="button" size="small" onClick={() => this.deleteCustomer(value)}>
+                <DeleteIcon />
+              </Button>
             )
           },
           

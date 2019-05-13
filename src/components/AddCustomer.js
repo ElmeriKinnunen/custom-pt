@@ -39,7 +39,11 @@ class AddCustomer extends Component {
   render() {
     return (
       <div>
-        <Button style={{margin: 10}} variant="outlined" color="primary" onClick={this.handleClickOpen}>
+        <Button style={{margin: 20,  
+          background: '#2196F3', 
+          boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', 
+          color:'white'}} 
+          variant="outlined" color="primary" onClick={this.handleClickOpen}>
             Add new customer
         </Button>
         <Dialog
