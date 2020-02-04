@@ -1,3 +1,7 @@
+This personal trainer web app is final project at Front-end course at school. In app personal trainer can create, update and delete training slots to a calendar. Users like trainers can sign up for a different training events. Made with React and Bootstrap.
+
+I'll add some screenshots later.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
